@@ -1,0 +1,30 @@
+.wpfs-featured-specifications {
+    width: 100%;
+}
+
+.wpfs-featured-specifications > thead > tr > td:nth-child(n+2):nth-child(-n+3) {
+    background-color: #EEE;
+    font-weight: bold;
+}
+
+.wpfs-featured-specifications input[type="text"] {
+    width: 100%;
+}
+
+.wpfs-featured-specifications > tbody > tr > td:nth-of-type(1),
+.wpfs-featured-specifications > tbody > tr > td:nth-of-type(4) {
+    width: 0;
+}
+
+.wpfs-featured-specifications .wpfs-specification-template {
+    display: none;
+}
+
+.wpfs-featured-specifications .wpfs-specification-drag {
+    cursor: move;
+    font-size: 1.75em;
+}
+
+.wpfs-featured-specifications .wpfs-specification td:first-child {
+    width: 2.0em;
+}
