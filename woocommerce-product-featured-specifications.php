@@ -105,7 +105,7 @@ function wpfs_save_featured_specifications($post_id) {
     }
 
     $specifications = array();
-    
+
     if (array_key_exists('wpfs-specification-title', $_POST) &&
         array_key_exists('wpfs-specification-description', $_POST)) {        
         $titles = $_POST['wpfs-specification-title'];
@@ -132,7 +132,7 @@ function wpfs_add_featured_specification_table($short_description) {
     $meta = get_post_meta($post->ID, 'wpfs_featured_specifications', true);
 
     if (!$meta) {
-        return;
+        return $short_description;
     }
     
     $html = '';
