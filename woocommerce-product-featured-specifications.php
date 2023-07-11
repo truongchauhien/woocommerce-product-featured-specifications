@@ -100,25 +100,30 @@ function wpfs_display_featured_specifications_editor($post) {
 
 add_action('save_post', 'wpfs_save_featured_specifications');
 function wpfs_save_featured_specifications($post_id) {
+    if (wp_is_post_autosave($post_id)) {
+        return;
+    }
+
+    $specifications = array();
+    
     if (array_key_exists('wpfs-specification-title', $_POST) &&
         array_key_exists('wpfs-specification-description', $_POST)) {        
         $titles = $_POST['wpfs-specification-title'];
         $descriptions = $_POST['wpfs-specification-description'];
 
-        $specifications = array();
         foreach ($titles as $index => $title) {
             $specifications[] = [
                 'title' => $title,
                 'description' => $descriptions[$index]
             ];
         }
-
-        update_post_meta(
-            $post_id,
-            'wpfs_featured_specifications',
-            json_encode($specifications, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS)
-        );
     }
+
+    update_post_meta(
+        $post_id,
+        'wpfs_featured_specifications',
+        json_encode($specifications, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS)
+    );
 }
 
 add_filter( 'woocommerce_short_description', 'wpfs_add_featured_specification_table');
