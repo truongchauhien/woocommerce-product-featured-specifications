@@ -126,14 +126,14 @@ function wpfs_save_featured_specifications($post_id) {
     );
 }
 
-add_filter( 'woocommerce_short_description', 'wpfs_add_featured_specification_table');
+add_filter('woocommerce_short_description', 'wpfs_add_featured_specification_table');
 function wpfs_add_featured_specification_table($short_description) {
     global $post;
     $meta = get_post_meta($post->ID, 'wpfs_featured_specifications', true);
 
     if (!$meta) {
         return $short_description;
-    }
+    }    
     
     $html = '';
 
@@ -153,6 +153,13 @@ function wpfs_add_featured_specification_table($short_description) {
 
     $short_description .= $html;
     return $short_description;
+}
+
+add_filter('woocommerce_available_variation', 'wpfs_remove_duplicated_variation_short_description', 10, 3);
+function wpfs_remove_duplicated_variation_short_description($data, $product, $variation) {
+    $data['variation_description'] = $variation->get_description();
+
+    return $data;
 }
 
 add_action('admin_enqueue_scripts', 'wpfs_add_admin_scripts');
