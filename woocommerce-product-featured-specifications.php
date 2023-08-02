@@ -131,9 +131,9 @@ function wpfs_add_featured_specification_table($short_description) {
     global $post;
     $meta = get_post_meta($post->ID, 'wpfs_featured_specifications', true);
 
-    if (!$meta) {
+    if (!$meta || !is_product()) {
         return $short_description;
-    }    
+    }
     
     $html = '';
 
